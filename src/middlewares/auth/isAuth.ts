@@ -12,7 +12,7 @@ export default function isAuth(
     req.headers.Authorization ||
     req.cookies.__session;
 
-  console.log({ token });
+  // console.log({ token });
 
   if (!token)
     return res.status(401).json({
@@ -29,12 +29,12 @@ export default function isAuth(
         });
 
       req.user = {
-        clerkID: decoded.clerkID,
+        _id: decoded._id,
         picture: decoded.picture,
         firstName: decoded.firstName,
         lastName: decoded.lastName,
         fullName: decoded.fullName,
-        username: decoded.clerkID,
+        username: decoded.username,
         hasPicture: decoded.hasPicture,
         phoneNumber: decoded.phoneNumber,
         primaryEmail: decoded.primaryEmail,

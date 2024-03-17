@@ -5,7 +5,7 @@ interface AuthenticatedRequest extends Request {
   user?: {
     // Define the structure of your user object here
     // For example, if user has an ID, you can define it like this:
-    clerkID: string | null;
+    _id: string | null;
 
     username: string | null;
 

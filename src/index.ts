@@ -5,6 +5,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import connectToDB from "@/utils/connectToDB";
 import rootRoute from "@/routes/root.routes";
+import clerkClient from "@clerk/clerk-sdk-node";
 
 const app = express();
 connectToDB();
@@ -18,8 +19,18 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.json("WORKING ✅");
+app.get("/", async (req, res) => {
+  try {
+    // const user = await clerkClient.users.getUser(
+    //   "user_2dfUmmUCjp6MSKAN8IWvwSY6zB8"
+    // );
+    const users = await clerkClient.users.getUserList();
+
+    res.status(200).json({ users });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error", error });
+  }
 });
 
 app.use("/api", rootRoute);

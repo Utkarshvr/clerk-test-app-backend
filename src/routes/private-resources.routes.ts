@@ -27,7 +27,7 @@ privateResourcesRoute.get(
 privateResourcesRoute.get(
   "/mongodb-profile",
   async (req: AuthenticatedRequest, res) => {
-    const clerkID = req.user.clerkID;
+    const clerkID = req.user._id;
 
     try {
       const user = await Users.findOne({ clerkID });
